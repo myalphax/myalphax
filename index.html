@@ -1,97 +1,13 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlphaX | 安全好用的链上 DEX 交易所</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body { background-color: #0b0e11; color: #ffffff; }
-        .gradient-text {
-            background: linear-gradient(90deg, #f0b90b, #fcd535);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .card-bg { background: #1e2329; border: 1px solid #2b3139; }
-    </style>
-</head>
-<body class="font-sans antialiased">
-
-    <nav class="flex items-center justify-between px-8 py-4 border-b border-gray-800 sticky top-0 bg-[#0b0e11] z-50">
-        <div class="flex items-center space-x-2">
-            <span class="text-2xl font-bold tracking-tighter text-white">Alpha<span class="text-yellow-500">X</span></span>
-        </div>
-        <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
-            <a href="#" class="hover:text-yellow-500 transition">现货交易</a>
-            <a href="#" class="hover:text-yellow-500 transition">合约交易</a>
-            <a href="#" class="hover:text-yellow-500 transition">资金透明度</a>
-        </div>
-        <a href="https://www.alphax.com" class="bg-yellow-500 hover:bg-yellow-600 text-black px-5 py-2 rounded-lg font-bold transition">
-            立即交易
-        </a>
-    </nav>
-
-    <section class="max-w-7xl mx-auto px-8 py-20 text-center">
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
-            像 CEX 一样丝滑的 <br><span class="gradient-text">链上 DEX 体验</span>
-        </h1>
-        <p class="text-gray-400 text-xl max-w-2xl mx-auto mb-10">
-            AlphaX 提供丰富的币种合约与现货交易。资金全量上链，由智能合约托管，让您在享受极致流畅交易的同时，拥有 100% 的资产掌控权。
-        </p>
-        <div class="flex flex-col md:flex-row justify-center gap-4">
-            <button class="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-xl text-lg font-bold">
-                开始合约交易
-            </button>
-            <button class="border border-gray-600 hover:bg-gray-800 px-8 py-4 rounded-xl text-lg font-bold transition">
-                查看实时数据
-            </button>
-        </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto px-8 py-20 grid md:grid-cols-3 gap-8">
-        <div class="card-bg p-8 rounded-2xl">
-            <i class="fas fa-bolt text-3xl text-yellow-500 mb-4"></i>
-            <h3 class="text-xl font-bold mb-2">极速交易体验</h3>
-            <p class="text-gray-400">告别链上延迟。AlphaX 采用高性能撮合引擎，操作反馈与传统交易所毫无二致。</p>
-        </div>
-        <div class="card-bg p-8 rounded-2xl">
-            <i class="fas fa-shield-alt text-3xl text-yellow-500 mb-4"></i>
-            <h3 class="text-xl font-bold mb-2">资金完全透明</h3>
-            <p class="text-gray-400">所有资金通过智能合约锁定在链上，无黑箱操作，每一笔充提与成交均真实可查。</p>
-        </div>
-        <div class="card-bg p-8 rounded-2xl">
-            <i class="fas fa-coins text-3xl text-yellow-500 mb-4"></i>
-            <h3 class="text-xl font-bold mb-2">丰富币种选择</h3>
-            <p class="text-gray-400">涵盖主流币及热门长尾币种，提供高达 100x 的灵活杠杆合约交易。</p>
-        </div>
-    </section>
-
-    <section class="bg-[#161a1e] py-20">
-        <div class="max-w-5xl mx-auto px-8 text-center">
-            <h2 class="text-3xl font-bold mb-8">为什么选择 AlphaX?</h2>
-            <div class="grid md:grid-cols-2 gap-12 text-left">
-                <div class="flex space-x-4">
-                    <div class="text-yellow-500"><i class="fas fa-check-circle text-xl"></i></div>
-                    <div>
-                        <h4 class="font-bold">无需许可，全球触达</h4>
-                        <p class="text-gray-400 text-sm">连接钱包即可交易，您的资产始终属于您自己。</p>
-                    </div>
-                </div>
-                <div class="flex space-x-4">
-                    <div class="text-yellow-500"><i class="fas fa-check-circle text-xl"></i></div>
-                    <div>
-                        <h4 class="font-bold">机构级流动性</h4>
-                        <p class="text-gray-400 text-sm">深度优越，在大额订单执行时提供极小的滑点保护。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 border-t border-gray-800 text-center text-gray-500 text-sm">
-        <p>© 2026 AlphaX. All rights reserved. 访问官网: <a href="https://www.alphax.com" class="text-yellow-500">www.alphax.com</a></p>
-    </footer>
-
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>alphax-pro</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
