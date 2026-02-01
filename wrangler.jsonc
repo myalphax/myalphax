@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "myalphax", // 这里填写你在 Cloudflare Pages 上的项目名称
+  "name": "myalphax build token", // 这里填写你在 Cloudflare Pages 上的项目名称
   "pages_build_output_dir": "dist", // 告诉 Wrangler 静态文件在 dist 文件夹
   "compatibility_date": "2026-02-01"
 }
