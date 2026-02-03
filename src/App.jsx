@@ -1,5 +1,78 @@
-import React from 'react';
-import { Shield, Zap, Wrench, TrendingUp, Lock, ArrowUpRight, ChevronRight, Gift, Star, Users, Database, Activity, LayoutGrid } from 'lucide-react';
+
+import React, { useState,useEffect } from 'react';
+import { Shield, Zap, Wrench, ChevronRight, Clock, Code, Copy, Trash2, CheckCircle2 , Lock,  Gift, Star, Users, Database, Activity, ArrowLeft } from 'lucide-react';
+
+// --- 工具组件：JSON Parser ---
+const JsonParser = () => {
+    const [input, setInput] = useState('');
+    const [output, setOutput] = useState('');
+    const [error, setError] = useState('');
+
+    const handleParse = () => {
+        try {
+            const parsed = JSON.parse(input);
+            setOutput(JSON.stringify(parsed, null, 2));
+            setError('');
+        } catch (e) {
+            setError('Invalid JSON format');
+            setOutput('');
+        }
+    };
+
+    return (
+        <div className="space-y-4">
+      <textarea
+          className="w-full h-40 bg-black border border-white/10 rounded-xl p-4 font-mono text-sm focus:border-white/30 outline-none transition"
+          placeholder="粘贴 JSON 字符串..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+      />
+            <div className="flex gap-2">
+                <button onClick={handleParse} className="px-6 py-2 bg-white text-black rounded-full font-bold text-xs uppercase tracking-widest hover:bg-zinc-200">Parse & Format</button>
+                <button onClick={() => {setInput(''); setOutput(''); setError('');}} className="p-2 border border-white/10 rounded-full hover:bg-white/5"><Trash2 size={16}/></button>
+            </div>
+            {error && <p className="text-red-500 text-xs font-bold">{error}</p>}
+            {output && (
+                <pre className="w-full h-64 bg-zinc-900/50 border border-white/5 rounded-xl p-4 font-mono text-xs overflow-auto text-green-400">
+          {output}
+        </pre>
+            )}
+        </div>
+    );
+};
+
+// --- 工具组件：时间戳转换 ---
+const TimestampConverter = () => {
+    const [timestamp, setTimestamp] = useState(Math.floor(Date.now() / 1000).toString());
+    const [result, setResult] = useState('');
+
+    const convertToDate = () => {
+        const date = new Date(parseInt(timestamp) * (timestamp.length === 13 ? 1 : 1000));
+        setResult(date.toLocaleString());
+    };
+
+    return (
+        <div className="space-y-6">
+            <div className="flex flex-col gap-2">
+                <label className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Unix Timestamp (Seconds/ms)</label>
+                <input
+                    type="text"
+                    className="bg-black border border-white/10 rounded-xl p-4 font-mono focus:border-white/30 outline-none"
+                    value={timestamp}
+                    onChange={(e) => setTimestamp(e.target.value)}
+                />
+            </div>
+            <button onClick={convertToDate} className="w-full py-4 bg-zinc-800 text-white rounded-xl font-bold text-xs uppercase tracking-[0.3em] hover:bg-zinc-700 transition">Convert to Local Time</button>
+            {result && (
+                <div className="p-4 bg-white/5 border border-dashed border-white/20 rounded-xl text-center">
+                    <p className="text-zinc-500 text-xs uppercase mb-1">Resulting Date</p>
+                    <p className="text-xl font-black font-mono">{result}</p>
+                </div>
+            )}
+        </div>
+    );
+};
+
 
 // 通用：深色质感卡片
 const PremiumCard = ({ children, className = "", title }) => (
@@ -12,6 +85,51 @@ const PremiumCard = ({ children, className = "", title }) => (
 );
 
 export default function AlphaXProDashboard() {
+
+    const [currentPage, setCurrentPage] = useState('home');
+
+    // 自动滚回顶部
+    useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
+
+    if (currentPage === 'tools') {
+        return (
+            <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-white selection:text-black">
+                <nav className="border-b border-white/5 sticky top-0 bg-black/80 backdrop-blur-xl z-50">
+                    <div className="max-w-[1440px] mx-auto flex justify-between items-center py-6 px-10">
+                        <div className="text-2xl font-black italic tracking-tighter cursor-pointer" onClick={() => setCurrentPage('home')}>AlphaX</div>
+                        <button onClick={() => setCurrentPage('home')} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-zinc-400 hover:text-white transition">
+                            <ArrowLeft size={14} /> Back to Exchange
+                        </button>
+                    </div>
+                </nav>
+
+                <main className="max-w-[1200px] mx-auto px-10 py-20">
+                    <div className="mb-16">
+                        <h2 className="text-6xl font-black italic tracking-tighter uppercase mb-4 leading-none">Developer <br /><span className="text-zinc-700">Toolbox</span></h2>
+                        <div className="w-20 h-1 bg-white" />
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-8">
+                        <section className="bg-zinc-900/40 border border-white/5 p-10 rounded-[2.5rem] backdrop-blur-md">
+                            <div className="flex items-center gap-4 mb-8">
+                                <Code className="text-zinc-600" size={28} />
+                                <h3 className="text-sm font-black uppercase tracking-[0.2em]">JSON Formatter</h3>
+                            </div>
+                            <JsonParser />
+                        </section>
+
+                        <section className="bg-zinc-900/40 border border-white/5 p-10 rounded-[2.5rem] backdrop-blur-md">
+                            <div className="flex items-center gap-4 mb-8">
+                                <Clock className="text-zinc-600" size={28} />
+                                <h3 className="text-sm font-black uppercase tracking-[0.2em]">Timestamp Converter</h3>
+                            </div>
+                            <TimestampConverter />
+                        </section>
+                    </div>
+                </main>
+            </div>
+        );
+    }
     return (
         <div className="w-full min-h-screen bg-[#050505] text-white font-sans antialiased selection:bg-white selection:text-black pb-20">
 
@@ -158,20 +276,41 @@ export default function AlphaXProDashboard() {
 
             </main>
 
-            {/* 7. 页脚 */}
-            <footer className="w-full border-t border-white/5 pt-20 pb-10">
-                <div className="max-w-[1440px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-10">
-                    <div className="flex items-center gap-4">
-                        <span className="text-xl font-black italic tracking-tighter">AlphaX</span>
-                        <span className="text-[10px] text-zinc-700 tracking-[0.3em] font-bold">GLOBAL DEX PROTOCOL</span>
+            {/* 页脚 - 按钮放在这里 */}
+            <footer className="w-full border-t border-white/5 py-20 bg-black">
+                <div className="max-w-[1440px] mx-auto px-10">
+                    <div className="grid md:grid-cols-4 gap-12 mb-20">
+                        <div className="col-span-2">
+                            <div className="text-2xl font-black italic tracking-tighter mb-6">AlphaX</div>
+                            <p className="text-xs text-zinc-600 max-w-xs leading-relaxed uppercase font-bold tracking-widest">
+                                The next generation decentralized exchange. Professional tools for professional traders.
+                            </p>
+                        </div>
+                        <div className="flex flex-col gap-4 text-[10px] font-black uppercase tracking-widest text-zinc-500">
+                            <span className="text-white mb-2">Platform</span>
+                            <a href="https://alphax.com" className="hover:text-white">Exchange</a>
+                            <a href="https://alphax.com" className="hover:text-white">API Docs</a>
+                            <a href="https://alphax.com" className="hover:text-white">Audit</a>
+                        </div>
+                        <div className="flex flex-col gap-4 text-[10px] font-black uppercase tracking-widest text-zinc-500">
+                            <span className="text-white mb-2">Utility</span>
+                            {/* 核心入口：放在这里 */}
+                            <button
+                                onClick={() => setCurrentPage('tools')}
+                                className="text-left hover:text-white flex items-center gap-2 text-zinc-300"
+                            >
+                                <Wrench size={12} /> Dev Tools
+                            </button>
+                            <a href="https://alphax.com" className="hover:text-white">Status</a>
+                        </div>
                     </div>
-                    <div className="flex gap-12 text-[10px] text-zinc-500 font-black uppercase tracking-widest">
-                        <a href="https://www.alphax.com">Twitter</a>
-                        <a href="https://www.alphax.com">Telegram</a>
-                        <a href="https://www.alphax.com">Audits</a>
-                        <a href="https://www.alphax.com">Privacy</a>
+                    <div className="flex justify-between items-center pt-10 border-t border-white/5 opacity-30 text-[9px] font-black uppercase tracking-[0.3em]">
+                        <span>© 2026 AlphaX Protocol</span>
+                        <div className="flex gap-10">
+                            <a href="https://alphax.com">Terms</a>
+                            <a href="https://alphax.com">Privacy</a>
+                        </div>
                     </div>
-                    <div className="text-[10px] text-zinc-700 font-bold uppercase tracking-widest">© 2026 ALPHAX. ALL RIGHTS RESERVED.</div>
                 </div>
             </footer>
         </div>
